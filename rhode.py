@@ -70,13 +70,9 @@ def main():
 			template = screenshot(device_id, 'template')
 			print tar
 			pos = findPos(template, tar)
-			while pos is None:
-				template = screenshot(device_id, 'template')
-				print tar
-				pos = findPos(template, tar)
-				time.sleep(3)
-			click(device_id, pos)
-			time.sleep(3)
+			if pos is not None:
+				click(device_id, pos)
+				time.sleep(5)
 			stop = screenshot(device_id, 'stop')
 			for st in  stop_list:
 				ret = findPos(stop, st)
