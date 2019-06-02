@@ -73,13 +73,11 @@ def main():
 			if pos is not None:
 				click(device_id, pos)
 				time.sleep(5)
-			stop = screenshot(device_id, 'stop')
-			for st in  stop_list:
-				ret = findPos(stop, st)
-				if ret:
-					close = True
-					break
-			if close:
+		stop = screenshot(device_id, 'stop')
+		for st in  stop_list:
+			ret = findPos(stop, st)
+			if ret:
+				close = True
 				break
 	lock(device_id)
 
