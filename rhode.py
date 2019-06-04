@@ -19,11 +19,10 @@ if not os.path.isdir(os.path.join(pyPath, 'template')):
 	os.makedirs(os.path.join(pyPath, 'template'))
 
 def findPos(template, target):
-	target_rgb = cv2.imread(target)
-	t_h, t_w = target_rgb.shape[0:2]
-	target_gray = cv2.cvtColor(target_rgb, cv2.COLOR_BGR2GRAY)
-	template_rgb = cv2.imread(template, 0)
-	res = cv2.matchTemplate(target_gray, template_rgb, cv2.TM_CCOEFF_NORMED)
+	target_gray = cv2.imread(target, 0)
+	t_h, t_w = target_gray.shape[0:2]
+	template_gray = cv2.imread(template, 0)
+	res = cv2.matchTemplate(target_gray, template_gray, cv2.TM_CCOEFF_NORMED)
 	value = cv2.minMaxLoc(res)
 	rate = value[1]
 	print rate
@@ -74,7 +73,7 @@ def main():
 				click(device_id, pos)
 				time.sleep(5)
 		stop = screenshot(device_id, 'stop')
-		for st in  stop_list:
+		for st in stop_list:
 			ret = findPos(stop, st)
 			if ret:
 				close = True
