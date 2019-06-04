@@ -56,7 +56,8 @@ func Typeof(v interface{}) string {
 
 func execute(cmd string, args []string) {
 	fmt.Println(fmt.Sprintf("%+v %+v", cmd, strings.Join(args, " ")))
-	exec.Command(cmd, args...)
+	exe := exec.Command(cmd, args...)
+	exe.Output()
 }
 
 func findPos(template string, target string) []int {
@@ -97,7 +98,7 @@ func screenshot(device_id string, tag string) string {
 }
 
 func click(device_id string, pos []int) {
-	args := strings.Split(fmt.Sprintf("-s %+v shell input tap %+v %+v", pos[0], pos[1]), " ")
+	args := strings.Split(fmt.Sprintf("-s %+v shell input tap %+v %+v", device_id, pos[0], pos[1]), " ")
 	execute("adb", args)
 }
 
